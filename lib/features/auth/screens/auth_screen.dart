@@ -39,7 +39,7 @@ class _AuthScreenState extends State<AuthScreen> {
     authServices.signUpUser(
         context: context,
         name: _nameController.text,
-        email: _nameController.text,
+        email: _emailController.text,
         password: _passwordController.text);
   }
 

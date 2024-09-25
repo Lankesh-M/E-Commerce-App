@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
@@ -13,21 +15,29 @@ class AuthServices {
       required String password}) async {
     try {
       User user = User(
-          name: "",
+          name: name,
           id: '',
-          email: '',
-          password: '',
+          email: email,
+          password: password,
           token: '',
           address: '',
           type: '');
 
       http.Response res = await http.post(Uri.parse('$uri/api/signup'),
           body: user.toJson(),
+          //For checking purporse
+          // body: jsonEncode({
+          //   'name': 'John Doe',
+          //   'email': 'johndoe@example.com',
+          //   'password': '123456',
+          //   'address': '123 Main St',
+          //   'type': 'user'
+          // }),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=utf-8'
           });
-
-      print(res.body);
+      // print(user.toJson());
+      // print(res.body);
       httpErrorHandle(
           response: res,
           context: context,
