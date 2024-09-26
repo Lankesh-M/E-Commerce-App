@@ -10,7 +10,7 @@ const authRouter = require('./routes/auth')
 
 //Init
 const app = express() //Getting express instance
-const PORT = process.env.PORT || 3000
+const PORT =  3000
 const DB = "mongodb+srv://lankeshmeganathan:amazon%40123@cluster0.izqnv.mongodb.net/Cluster0?retryWrites=true&w=majority&appName=Cluster0";
 
 //Middle ware
