@@ -25,16 +25,6 @@ mongoose.connect(DB).then(() => {
     console.log(e);
 })
 // Connecting to the port address
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Connected at port ${PORT}`);
 });
-
-// const EventEmmitter = require('events');
-
-// var event = new EventEmmitter();
-
-// event.on('MyEvent', (text) => {
-//     console.log(`Hello $text`);
-// });
-
-// event.emit('MyEvent', "Lankesh");

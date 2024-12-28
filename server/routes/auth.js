@@ -6,11 +6,11 @@ const authRouter = express.Router();
 
 // Other packages
 const bcrypt = require('bcryptjs');
+const auth = require("../middleware/auth");
 
 //SIGN UP ROUTE
 authRouter.post('/api/signup', async (req, res) => {
-
-    //Use try catch block
+    try{
     const {name, email, password} = req.body;
     const existingUser = await User.findOne( { email } );
 
@@ -33,6 +33,9 @@ authRouter.post('/api/signup', async (req, res) => {
 
     user = await user.save();
     res.status(200).json(user);
+    }catch (err) {
+        res.status(500).json({error : err.message });
+    }
 })
 
 
@@ -58,7 +61,36 @@ authRouter.post('/api/signin', async (req, res) => {
         // console.log(user._doc)
         res.status(200).json({ token, ...user._doc });
     }catch(e){
-        res.status(500).json({ error : e.message + " catch" })
+        res.status(500).json({ error : e.message })
     }
+});
+
+//Get user data - API Checked
+authRouter.post('/tokenIsValid', async (req, res) => {
+    try{
+        const token = req.header("x-auth-token");
+
+        if(!token) return res.json(false);
+
+        const isVerified = jwt.verify(token, 'passwordKey');
+
+        if(!isVerified) return res.json(false);
+        
+        const user = await User.findById(isVerified.id);
+        
+        if(!user) return res.json(false);
+
+        return res.json(true);
+
+    }catch(e){
+        res.status(500).json({ error : e.message})
+    }
+});
+
+// This uses auth middleware
+authRouter.get('/', auth, async (req, res) => {
+    const user = await User.findById(req.user);
+    console.log(user);
+    res.json({...user._doc, token : req.token});
 });
 module.exports = authRouter;

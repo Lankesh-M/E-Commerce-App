@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-String uri = 'http://172.20.144.1:3000';
+String uri = 'http://192.168.145.13:3000'; // Your IP Address - ipconfig
 
-//  192.168.150.239
-//  192.168.150.13
-//  172.20.144.1
+// Connection-specific DNS Suffix  . :
+//    IPv4 Address. . . . . . . . . . . : 192.168.145.13
+//    Subnet Mask . . . . . . . . . . . : 255.255.255.0
+//    Default Gateway . . . . . . . . . : 192.168.145.73
 class GlobalVariables {
   // COLORS
   static const appBarGradient = LinearGradient(

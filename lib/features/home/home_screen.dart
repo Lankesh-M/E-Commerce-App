@@ -14,6 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final currentUser = Provider.of<UserProvider>(context).user;
+    print(currentUser.toMap());
     return Scaffold(
       body: Center(
         child: Text(currentUser.toJson()),
